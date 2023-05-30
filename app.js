@@ -4,19 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb://localhost/locallibrary';
+const mongoDB = 'mongodb://127.0.0.1:27017/locallibrary';
 const catalogRouter = require('./routes/catalog');
 
 mongoose.set('strictQuery', false);
 
-main().catch((err) => console.log(err));
+main().catch((err) => console.log('err', err));
 
 async function main() {
-  await mongoose.connect(mongoDB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  });
+  await mongoose.connect(mongoDB);
 }
 
 var indexRouter = require('./routes/index');
